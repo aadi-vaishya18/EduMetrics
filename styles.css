@@ -1,0 +1,374 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@500;700&display=swap');
+
+:root {
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --bg-gradient-start: #0f172a;
+    --bg-gradient-end: #1e1b4b;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #10b981;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Animated Blobs */
+.blob {
+    position: absolute;
+    filter: blur(90px);
+    z-index: -1;
+    opacity: 0.5;
+    animation: float 10s ease-in-out infinite;
+    border-radius: 50%;
+}
+.blob-1 {
+    top: -15%; left: -10%; width: 450px; height: 450px; background: #6366f1;
+}
+.blob-2 {
+    bottom: -15%; right: -10%; width: 550px; height: 550px; background: #8b5cf6; animation-delay: -5s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-40px) scale(1.05); }
+}
+
+/* Main Container: Glassmorphism */
+#app {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 28px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    z-index: 10;
+}
+
+h1, h2, h3 {
+    font-family: 'Outfit', sans-serif;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+h1 {
+    font-size: 38px;
+    background: linear-gradient(to right, #c084fc, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    margin-bottom: 40px;
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-size: 26px;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+p, label {
+    font-size: 15px;
+    color: var(--text-muted);
+}
+
+/* Form Elements */
+input[type="text"], input[type="password"], input[type="number"], textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--card-border);
+    color: white;
+    padding: 18px;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+input[type="text"]::placeholder, input[type="password"]::placeholder, input[type="number"]::placeholder, textarea::placeholder {
+    color: #475569;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--primary), #4f46e5);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.7);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px -10px rgba(99, 102, 241, 0.9);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 5px 10px -10px rgba(99, 102, 241, 0.5);
+}
+
+button.secondary-btn {
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: none;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-muted);
+}
+
+button.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    box-shadow: none;
+}
+
+/* Exam Section specific */
+#question-container {
+    background: rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.03);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 8px;
+}
+
+#question-text {
+    font-size: 19px;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+#options-container > div {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--card-border);
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+#options-container > div:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(4px);
+}
+
+input[type="radio"] {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--text-muted);
+    border-radius: 50%;
+    margin-right: 14px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+input[type="radio"]:checked {
+    border-color: var(--primary);
+}
+
+input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--primary);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#score-display {
+    font-size: 24px;
+    color: var(--text-main);
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 16px;
+}
+
+/* ============================ */
+/*    ADMIN DASHBOARD STYLES    */
+/* ============================ */
+
+/* Admin Form Enhancements */
+.admin-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.admin-header h2 {
+    margin-bottom: 8px;
+}
+.admin-header p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    text-align: left;
+}
+.form-group label, .variant-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    margin-left: 4px;
+}
+.form-group input, .form-group select, .form-group textarea {
+    margin-bottom: 0;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.enhanced-btn {
+    margin-top: 10px;
+    background: linear-gradient(135deg, var(--primary) 0%, #818cf8 100%);
+    box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.6);
+}
+
+.admin-summary {
+    margin-top: 30px;
+    text-align: center;
+}
+.count-tag {
+    margin-bottom: 12px;
+    font-weight: bold;
+    color: white;
+    background: rgba(0,0,0,0.3);
+    padding: 8px 16px;
+    border-radius: 20px;
+    display: inline-block;
+}
+.deploy-btn {
+    background: var(--accent);
+    box-shadow: 0 10px 20px -10px rgba(16, 185, 129, 0.7);
+}
+
+/* Role Toggle */
+.role-toggle {
+    display: flex;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    margin-bottom: 30px;
+    padding: 6px;
+}
+
+.toggle-btn {
+    flex: 1;
+    background: transparent;
+    box-shadow: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    padding: 12px;
+    margin: 0;
+}
+
+.toggle-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.toggle-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.05);
+    transform: none;
+    box-shadow: none;
+}
+
+/* Layout Utilities */
+.flex-row {
+    display: flex;
+    gap: 12px;
+}
+
+/* Select Dropdown */
+select {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--card-border);
+    color: white;
+    padding: 18px;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-bottom: 24px;
+    cursor: pointer;
+}
+
+select option {
+    background: var(--bg-gradient-end);
+    color: white;
+}
+
+/* Dynamic Panels */
+.variant-panel {
+    background: rgba(0,0,0,0.1);
+    border: 1px dashed rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.mcq-option-row {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.mcq-option-row input[type="text"] {
+    margin-bottom: 0;
+}

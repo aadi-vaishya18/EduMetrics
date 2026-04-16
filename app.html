@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMetrics | Secure Online Examination System</title>
+    <meta name="description" content="EduMetrics provides a seamless and secure online assessment environment for institutions.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <main id="app">
+        <h1>EduMetrics</h1>
+        
+        <!-- ROLE TOGGLE -->
+        <div class="role-toggle">
+            <button id="btn-admin-view" class="toggle-btn active">Admin Mode</button>
+            <button id="btn-student-view" class="toggle-btn">Student Portal</button>
+        </div>
+        
+        <!-- =============================== -->
+        <!--        ADMIN SECTION            -->
+        <!-- =============================== -->
+        
+        <!-- ADMIN AUTHENTICATION LOGIN -->
+        <section id="admin-login-section">
+            <div class="admin-card">
+                <div class="admin-header">
+                    <h2>Admin Authentication</h2>
+                    <p>Restricted access. Please authenticate to continue.</p>
+                </div>
+                <div class="form-group">
+                    <label for="admin-email">Email Address</label>
+                    <input type="text" id="admin-email" placeholder="example@edumetrics.com">
+                </div>
+                <div class="form-group">
+                    <label for="admin-password">Master Password</label>
+                    <input type="password" id="admin-password" placeholder="••••••••">
+                    <small id="pwd-error" style="color: #ef4444; font-size: 13px; font-weight: 500; margin-top: 8px; display: none;"></small>
+                </div>
+                <button id="admin-login-btn" class="enhanced-btn">Secure Login</button>
+            </div>
+        </section>
+
+        <!-- ADMIN DASHBOARD (HIDDEN UNTIL LOGIN) -->
+        <section id="admin-section" style="display: none;">
+            
+            <!-- STEP 1: EXAM CONFIGURATION -->
+            <div id="admin-step-1" class="admin-card">
+                <div class="admin-header">
+                    <h2>Configure Exam</h2>
+                    <p>Setup the global constraints for the upcoming assessment.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="admin-course-name">Course Name / Title</label>
+                    <input type="text" id="admin-course-name" placeholder="e.g., CS101: Data Structures">
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="admin-total-marks">Total Marks Allocated</label>
+                        <input type="number" id="admin-total-marks" placeholder="e.g., 100" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-time-limit">Time Limit (Minutes)</label>
+                        <input type="number" id="admin-time-limit" placeholder="e.g., 60" min="1">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="admin-passing-marks">Minimum Passing Threshold</label>
+                    <input type="number" id="admin-passing-marks" placeholder="e.g., 40" min="1">
+                </div>
+                
+                <button id="admin-create-btn" class="enhanced-btn">Initialize Exam Template</button>
+            </div>
+            
+            <!-- STEP 2: DYNAMIC QUESTION BUILDER -->
+            <div id="admin-step-2" class="admin-card" style="display: none;">
+                <div class="admin-header">
+                    <h2>Question Builder</h2>
+                    <p>Construct dynamic evaluation logic into the template.</p>
+                </div>
+                
+                <div id="question-builder-form">
+                    <div class="form-group">
+                        <label for="q-type-select">Format Type</label>
+                        <select id="q-type-select">
+                            <option value="mcq">Multiple Choice (MCQ)</option>
+                            <option value="tf">True / False</option>
+                            <option value="desc">Descriptive</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="q-text">Question Prompt</label>
+                        <textarea id="q-text" rows="2" placeholder="Write your question here..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="q-marks">Marks Allocated</label>
+                        <input type="number" id="q-marks" placeholder="e.g., 10">
+                    </div>
+                    
+                    <!-- DYNAMIC PANELS -->
+                    <div id="variant-mcq" class="variant-panel">
+                        <label class="variant-label">Define Options & Select Correct Route:</label>
+                        <div class="mcq-option-row">
+                            <input type="radio" name="mcq-correct" value="0" checked>
+                            <input type="text" class="mcq-input" placeholder="Option 1">
+                        </div>
+                        <div class="mcq-option-row">
+                            <input type="radio" name="mcq-correct" value="1">
+                            <input type="text" class="mcq-input" placeholder="Option 2">
+                        </div>
+                        <div class="mcq-option-row">
+                            <input type="radio" name="mcq-correct" value="2">
+                            <input type="text" class="mcq-input" placeholder="Option 3">
+                        </div>
+                        <div class="mcq-option-row">
+                            <input type="radio" name="mcq-correct" value="3">
+                            <input type="text" class="mcq-input" placeholder="Option 4">
+                        </div>
+                    </div>
+                    
+                    <div id="variant-tf" class="variant-panel" style="display: none;">
+                        <label class="variant-label">Designated Correct Answer:</label>
+                        <select id="tf-correct-val">
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                    </div>
+                    
+                    <div id="variant-desc" class="variant-panel" style="display: none;">
+                        <label class="variant-label">Target Keywords (comma-separated):</label>
+                        <input type="text" id="desc-keywords" placeholder="e.g., loop, array, function">
+                    </div>
+                    
+                    <button id="admin-add-q-btn" class="secondary-btn">+ Embed Question</button>
+                </div>
+                
+                <div class="admin-summary">
+                    <p class="count-tag">Questions Queued: <span id="q-count">0</span></p>
+                    <button id="admin-deploy-btn" class="deploy-btn">Publish & Deploy Exam</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- =============================== -->
+        <!--       STUDENT SECTION           -->
+        <!-- =============================== -->
+        
+        <!-- LOGIN SECTION -->
+        <section id="login-section" style="display: none;">
+            <h2>Student Portal</h2>
+            <p style="margin-bottom: 24px; text-align: center;">Authenticate to begin your secure assessment iteration.</p>
+            
+            <input type="text" id="student-name" placeholder="Enter Full Name" aria-label="Student Full Name">
+            
+            <button id="start-btn">Initialize Exam Session</button>
+        </section>
+
+        <!-- EXAM RUNTIME SECTION -->
+        <section id="exam-section" style="display: none;" aria-live="polite">
+            <h2 id="student-greeting" style="font-size: 20px;"></h2>
+            <h3 id="exam-title" style="color: #a855f7; font-size: 16px; font-weight: 500;"></h3>
+            
+            <div id="question-container">
+                <p id="question-text"></p>
+                <div id="options-container"></div>
+            </div>
+            
+            <div style="display: flex; gap: 12px; margin-top: 24px;">
+                <button id="undo-btn" class="secondary-btn" style="flex: 1; display: none;">Undo Last</button>
+                <button id="submit-btn" style="flex: 2;">Confirm & Submit</button>
+            </div>
+        </section>
+
+        <!-- RESULT SECTION -->
+        <section id="result-section" style="display: none;">
+            <h2>Assessment Concluded</h2>
+            <p>Your responses have been securely computed.</p>
+            <div id="score-display"></div>
+            <button id="merit-list-btn" class="secondary-btn">Review Merit Logs (Console)</button>
+        </section>
+
+    </main>
+    
+    <script src="app.js"></script>
+</body>
+</html>
